@@ -88,24 +88,28 @@ public class Lexer {
         // produce tokens until EOF
         while (src.length() > 0) {
             
-            for (int i = 0; i < tokens.size(); i++) {
-                System.out.println("src.length(): " + src.length());
-                System.out.println("token: " + tokens.get(i));
-                System.out.println("----------------------");
-            }
+            // System.out.println("src.length(): " + src.length());
+            // for (int i = 0; i < tokens.size(); i++) {
+            //     System.out.println("token: " + tokens.get(i));  
+            // }
+            // System.out.println("----------------------");
 
             // PARSING ONE CHARACTER TOKENS
             if (charEquals(src.charAt(0), "(")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "OpenParen"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "OpenParen"));
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), ")")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "CloseParen"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "CloseParen"));
+                src.deleteCharAt(0);
             } 
             else if (charEquals(src.charAt(0), "{")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "OpenCurly"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "OpenCurly"));
+                src.deleteCharAt(0);
             } 
             else if (charEquals(src.charAt(0), "}")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "CloseCurly"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "CloseCurly"));
+                src.deleteCharAt(0);
             } 
             // handle binary operators
             else if (
@@ -116,62 +120,87 @@ public class Lexer {
                 charEquals(src.charAt(0), "%") || 
                 charEquals(src.charAt(0), "&&")
             ) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "BinaryOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "BinaryOperator"));
+                src.deleteCharAt(0);
             }
             // handle assignment, logical and conditional tokens
             else if (charEquals(src.charAt(0), "=") && charEquals(src.charAt(1), "=")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString() + src.deleteCharAt(1).toString(), "ComparisonOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "ComparisonOperator"));
+                src.deleteCharAt(0);
+                src.deleteCharAt(1);
             }
             else if (charEquals(src.charAt(0), ">") && charEquals(src.charAt(1), "=")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString() + src.deleteCharAt(1).toString(), "ComparisonOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "ComparisonOperator"));
+                src.deleteCharAt(0);
+                src.deleteCharAt(1);
             }
             else if (charEquals(src.charAt(0), "<") && charEquals(src.charAt(1), "=")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString() + src.deleteCharAt(1).toString(), "ComparisonOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "ComparisonOperator"));
+                src.deleteCharAt(0);
+                src.deleteCharAt(1);
             }
             else if (charEquals(src.charAt(0), "!") && charEquals(src.charAt(1), "=")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString() + src.deleteCharAt(1).toString(), "ComparisonOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "ComparisonOperator"));
+                src.deleteCharAt(0);
+                src.deleteCharAt(1);
             }
             else if (charEquals(src.charAt(0), ">")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "ComparisonOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "ComparisonOperator"));
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), "<")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "ComparisonOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "ComparisonOperator"));
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), "!")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "UnaryOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "UnaryOperator"));
+                src.deleteCharAt(0);
             } 
             else if (charEquals(src.charAt(0), "&") && charEquals(src.charAt(1), "&")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString() + src.deleteCharAt(1).toString(), "LogicalOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "LogicalOperator"));
+                src.deleteCharAt(0);
+                src.deleteCharAt(1);
             }
             else if (charEquals(src.charAt(0), "|") && charEquals(src.charAt(1), "|")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString() + src.deleteCharAt(1).toString(), "LogicalOperator"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "LogicalOperator"));
+                src.deleteCharAt(0);
+                src.deleteCharAt(1);
             }
             else if (charEquals(src.charAt(0), "=")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "Equals"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "Equals"));
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), ";")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "Semicolon"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "Semicolon"));
+                src.deleteCharAt(0);
             } 
             else if (charEquals(src.charAt(0), ":")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "Colon"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "Colon"));
+                src.deleteCharAt(0);
             } 
             else if (charEquals(src.charAt(0), ",")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "Comma"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "Comma"));
+                src.deleteCharAt(0);
             } 
             else if (charEquals(src.charAt(0), ".")) {
-                tokens.add(getToken(src.deleteCharAt(0).toString(), "Period"));
+                tokens.add(getToken(String.valueOf(src.charAt(0)), "Period"));
+                src.deleteCharAt(0);
             } 
             // HANDLE MULTICHARACTER TOKENS
             else {
                 // Handle String literals
                 if (isQuotation(String.valueOf(src.charAt(0)))) {
-                    String stringLiteral = src.deleteCharAt(0).toString();
+                    String stringLiteral = String.valueOf(src.charAt(0));
+                    src.deleteCharAt(0);
+
                     while (src.length() > 0 && !isQuotation(String.valueOf(src.charAt(0)))) {
-                        stringLiteral += src.deleteCharAt(0).toString();
+                        stringLiteral += String.valueOf(src.charAt(0));
+                        src.deleteCharAt(0);
                     }
 
                     if (src.length() > 0) {
-                        stringLiteral += src.deleteCharAt(0).toString();
+                        stringLiteral += String.valueOf(src.charAt(0));
+                        src.deleteCharAt(0);
                     }
                     else {
                         throw new Exception("Missing closing double quote");
@@ -185,13 +214,17 @@ public class Lexer {
                 }
 
                 if (isApostrophe(String.valueOf(src.charAt(0)))) {
-                    String stringLiteral = src.deleteCharAt(0).toString();
+                    String stringLiteral = String.valueOf(src.charAt(0));
+                    src.deleteCharAt(0);
+
                     while (src.length() > 0 && !isApostrophe(String.valueOf(src.charAt(0)))) {
-                        stringLiteral += src.deleteCharAt(0).toString();
+                        stringLiteral += String.valueOf(src.charAt(0));
+                        src.deleteCharAt(0);
                     }
 
                     if (src.length() > 0) {
-                        stringLiteral += src.deleteCharAt(0).toString();
+                        stringLiteral += String.valueOf(src.charAt(0));
+                        src.deleteCharAt(0);
                     }
                     else {
                         throw new Exception("Missing closing single quote");
@@ -202,24 +235,18 @@ public class Lexer {
                 else if (isInt(String.valueOf(src.charAt(0)))) {
                     String num = "";
                     while (src.length() > 0 && isInt(String.valueOf(src.charAt(0)))) {
-                        num += src.deleteCharAt(0).toString();
+                        num += String.valueOf(src.charAt(0));
+                        src.deleteCharAt(0);
                     }
 
                     tokens.add(getToken(num, "Number"));
                 }
                 else if (isAlpha(String.valueOf(src.charAt(0)))) {
-
-                    //System.out.println("first char: " + src.charAt(0));
-
                     String identifier = "";
                     while (src.length() > 0 && isAlpha(String.valueOf(src.charAt(0)))) {
-                        //System.out.println("silly char: " + src.charAt(0));
-
                         identifier += String.valueOf(src.charAt(0));
                         src.deleteCharAt(0);
                     }
-
-                    //System.out.println("Identifier: " + identifier);
 
                     // check for reserved keywords
                     if (keywords.get(identifier) != null) {
@@ -233,7 +260,6 @@ public class Lexer {
                     src.deleteCharAt(0);
                 }
                 else {
-                    System.out.println(src.length());
                     throw new Exception("Unrecognized character found in source: " + src.charAt(0));
                 }
             }

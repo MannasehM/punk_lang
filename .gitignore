@@ -1,3 +1,7 @@
 example.txt
 notes.txt
 testLexer.sh
+src/parsing/lexer/*.class
+src/parsing/parser/*.class
+test/parsing/*.class
+test/runtime/*.class

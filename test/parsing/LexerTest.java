@@ -52,6 +52,28 @@ public class LexerTest {
             }
         }
 
+        public List<String> getExpectedTypes() {
+            return this.expectedTypes;
+        }
+
+        public List<String> getExpectedValues() {
+            return this.expectedValues;
+        }
+
+        public List<String> getActualTypes() {
+            if (tokenizeErrMsg != null) {
+                return null;
+            }
+            return this.actualTypes;
+        }
+
+        public List<String> getActualValues() {
+            if (tokenizeErrMsg != null) {
+                return null;
+            }
+            return this.actualValues;
+        }
+
         public void runTest() throws Exception {
             if (tokenizeErrMsg != null) {
                 throw new Exception(tokenizeErrMsg);
@@ -71,21 +93,6 @@ public class LexerTest {
             }
         }
     }
-
-    // public static void main(String[] args) {
-    //     UnitTest test1 = new UnitTest(new Lexer(), "var x = 5;");
-    //     test1.setExpectedTypes(Arrays.asList(
-    //         "Var", "Identifier", "Equals", "Number", "Semicolon", "EOF"
-    //     ));
-    //     test1.setExpectedValues(Arrays.asList(
-    //         "var", "x", "=", "5", ";", "EOF"
-    //     ));
-    //     try {
-    //         test1.runTest();
-    //     } catch (Exception e) {
-    //         System.out.println(e.getMessage());
-    //     }
-    // }
 
     public static void main(String[] args) {
 
@@ -160,6 +167,30 @@ public class LexerTest {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
+
+    private static void printTestDetails(UnitTest test, int index) {
+        System.out.println("\n-----------TEST " + (index + 1) + " CONTENTS------------");
+
+        System.out.println("Expected Types: " + test.getExpectedTypes());
+        System.out.println("Actual Types: " + test.getActualTypes());
+
+        if (test.getExpectedTypes().equals(test.getActualTypes())) {
+            System.out.println("PASS");
+        } else {
+            System.out.println("FAIL");
+        }
+
+        System.out.println("-----------------------");
+
+        System.out.println("Expected Values: " + test.getExpectedValues());
+        System.out.println("Actual Values: " + test.getActualValues());
+
+        if (test.getExpectedValues().equals(test.getActualValues())) {
+            System.out.println("PASS");
+        } else {
+            System.out.println("FAIL");
         }
     }
 }

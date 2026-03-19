@@ -127,22 +127,22 @@ public class Lexer {
             else if (charEquals(src.charAt(0), "=") && charEquals(src.charAt(1), "=")) {
                 tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "ComparisonOperator"));
                 src.deleteCharAt(0);
-                src.deleteCharAt(1);
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), ">") && charEquals(src.charAt(1), "=")) {
                 tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "ComparisonOperator"));
                 src.deleteCharAt(0);
-                src.deleteCharAt(1);
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), "<") && charEquals(src.charAt(1), "=")) {
                 tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "ComparisonOperator"));
                 src.deleteCharAt(0);
-                src.deleteCharAt(1);
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), "!") && charEquals(src.charAt(1), "=")) {
                 tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "ComparisonOperator"));
                 src.deleteCharAt(0);
-                src.deleteCharAt(1);
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), ">")) {
                 tokens.add(getToken(String.valueOf(src.charAt(0)), "ComparisonOperator"));
@@ -159,12 +159,12 @@ public class Lexer {
             else if (charEquals(src.charAt(0), "&") && charEquals(src.charAt(1), "&")) {
                 tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "LogicalOperator"));
                 src.deleteCharAt(0);
-                src.deleteCharAt(1);
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), "|") && charEquals(src.charAt(1), "|")) {
                 tokens.add(getToken(String.valueOf(src.charAt(0)) + String.valueOf(src.charAt(1)), "LogicalOperator"));
                 src.deleteCharAt(0);
-                src.deleteCharAt(1);
+                src.deleteCharAt(0);
             }
             else if (charEquals(src.charAt(0), "=")) {
                 tokens.add(getToken(String.valueOf(src.charAt(0)), "Equals"));
@@ -212,8 +212,7 @@ public class Lexer {
                         break;
                     }
                 }
-
-                if (isApostrophe(String.valueOf(src.charAt(0)))) {
+                else if (isApostrophe(String.valueOf(src.charAt(0)))) {
                     String stringLiteral = String.valueOf(src.charAt(0));
                     src.deleteCharAt(0);
 

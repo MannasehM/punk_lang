@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Node {
     private String type;
     private List<Node> children;

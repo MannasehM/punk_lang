@@ -20,12 +20,11 @@ public class Parser {
         return tokens.remove(0);
     }
 
-    public Node expect(String type, String message) {
+    public void expect(String type, String message) throws Exception {
         Token prev = nextToken();
         if (prev == null || prev.getType() != type) {
             throw new Exception(message);
         }
-        return prev;
     }
 
     // need parseStatement()
@@ -34,7 +33,7 @@ public class Parser {
 
     public Node produceAST(String sourceCode) {
         Lexer lexer = new Lexer();
-        tokens = tokenize(sourceCode);
+        tokens = lexer.tokenize(sourceCode);
 
         Node program = new Node("Program");
 
@@ -45,27 +44,9 @@ public class Parser {
         return program;
     }
 
-    public Node parsePrimaryExpr() {
-        String tokenType = tokens.currToken().getType();
-
-        switch (tokenType) {
-            case "Identifer": 
-                return new Node("Identifier", nextToken().getValue());
-            case "Number": 
-                return new Node("NumericLiteral", parseFloat(nextToken().getValue()));
-            case "StringLiteral": 
-                String value = nextToken().getValue();
-                // getting rid of quotation marks
-                String newVal = value.substring(1, value.length() - 1);
-                return new Node("StringLiteral", newVal);
-            case "OpenParen": 
-                nextToken(); // move to next token after the '('
-                Node node = parseExpr();
-                // to move past the ')' token
-                expect("CloseParen", "Missing closing parentheses");
-                return node;
-            default: 
-                throw new Exception("Unexpected token found during parsing: " + tokens.currToken().toString());
+    public Node parseStatement() {
+        switch(currToken().getType()) {
+            case 
         }
     }
 }

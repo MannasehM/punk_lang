@@ -5,3 +5,4 @@ src/parsing/lexer/*.class
 src/parsing/parser/*.class
 test/parsing/*.class
 test/runtime/*.class
+settings.json

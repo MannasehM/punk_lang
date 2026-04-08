@@ -1,5 +1,6 @@
 import java.util.*;
 import src.parsing.lexer.Lexer;
+import src.parsing.lexer.Token;
 import src.parsing.parser.Node;
 
 public class Parser {
@@ -20,7 +21,7 @@ public class Parser {
     }
 
     public Node expect(String type, String message) {
-        Node prev = nextToken();
+        Token prev = nextToken();
         if (prev == null || prev.getType() != type) {
             throw new Exception(message);
         }

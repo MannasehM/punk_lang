@@ -1,7 +1,6 @@
 import java.util.*;
 import src.parsing.lexer.Lexer;
 import src.parsing.lexer.Token;
-import src.parsing.parser.Node;
 
 public class Parser {
     private List<Token> tokens;
@@ -27,13 +26,14 @@ public class Parser {
         }
     }
 
-    // need parseStatement()
-    // need parseFloat()
-    // need parseExpr()
-
     public Node produceAST(String sourceCode) {
         Lexer lexer = new Lexer();
-        tokens = lexer.tokenize(sourceCode);
+        try {
+            tokens = lexer.tokenize(sourceCode);
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+        
 
         Node program = new Node("Program");
 
@@ -46,7 +46,21 @@ public class Parser {
 
     public Node parseStatement() {
         switch(currToken().getType()) {
-            case 
+            case "Var":
+                // parseVar()
+            case "CONST":
+                // parseConstant()
+            case "Function":
+                // parseFunction()
+            case "IfStatement":
+                // parseIfStatement()
+            case "ElseIfStatement":
+                // parseElseIfStatement()
+            case "ElseStatement":
+                // parseElseStatement()
+            default: 
+                // parseExpr() 
         }
+        return null; // placeholder
     }
 }
